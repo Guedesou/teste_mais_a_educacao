@@ -6,10 +6,6 @@
   <a href="#-funcionalidades">Funcionalidades</a>
 </p>
 
-<p align="center">
-  <img src="https://i.imgur.com/ykPPAsk.jpg" alt="Mini-Sistema de Alunos" width="100%">
-</p>
-
 ## 🚀 Tecnologias
 
 Este projeto foi desenvolvido com as seguintes tecnologias:
@@ -49,7 +45,7 @@ O sistema utiliza um banco de dados MySQL com:
 
 1. Clone o repositório
 ```bash
-git clone https://github.com/Guedesou/teste_tecnico_thiago_guedes.git
+git clone https://github.com/Guedesou/teste_mais_a_educacao.git
 ```
 
 2. Configure o banco de dados MySQL
