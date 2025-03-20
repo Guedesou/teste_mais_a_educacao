@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Sistema De Alunos Grupo +A</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            max-width: 150px;
+            border-radius: 8px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #0066cc;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        .btn-detalhes {
+            background-color: #3399ff;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-detalhes:hover {
+            background-color: #1a8cff;
+        }
+        .btn-excluir {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .btn-excluir:hover {
+            background-color: #c82333;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+        }
+        .close {
+            float: right;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .detalhe-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .detalhe-item strong {
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mini-Sistema De Alunos Grupo +A</h1>
+            <img src="logo.png" alt="Grupo +A Educação" class="logo">
+        </div>
+
+        <h2>Cadastrar Nova Matrícula</h2>
+        <form id="matriculaForm">
+            <div class="form-group">
+                <label for="codigo">Código da Matrícula:</label>
+                <input type="number" id="codigo" required>
+            </div>
+            <div class="form-group">
+                <label for="codigoAluno">Código do Aluno:</label>
+                <select id="codigoAluno" required>
+                    <option value="">Selecione um aluno</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" required min="2022" value="2024">
+            </div>
+            <div class="form-group">
+                <label for="semestre">Semestre:</label>
+                <select id="semestre" required>
+                    <option value="1">1º Semestre</option>
+                    <option value="2">2º Semestre</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dataMatricula">Data da Matrícula:</label>
+                <input type="date" id="dataMatricula" required>
+            </div>
+            <button type="submit">Cadastrar Matrícula</button>
+        </form>
+
+        <h2>Lista de Matrículas</h2>
+        <table id="matriculasTable">
+            <thead>
+                <tr>
+                    <th>Código do Aluno</th>
+                    <th>Nome</th>
+                    <th>Ano</th>
+                    <th>Semestre</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="matriculasBody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal de Detalhes do Aluno -->
+    <div id="modalDetalhes" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detalhes do Aluno</h2>
+            <div id="detalhesAluno">
+                <div class="detalhe-item">
+                    <strong>Código:</strong> <span id="alunoCodigo"></span>
+                </div>
+                <div class="detalhe-item">
+                    <strong>Nome:</strong> <span id="alunoNome"></span>
+                </div>
+                <div class="detalhe-item">
+                    <strong>Endereço:</strong> <span id="alunoEndereco"></span>
+                </div>
+            </div>
+            <button class="btn-excluir" onclick="excluirMatricula()">Excluir Matrícula</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
