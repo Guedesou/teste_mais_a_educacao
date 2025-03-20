@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/ykPPAsk.png" alt="Mini-Sistema de Alunos" width="100%">
+  <img src="https://i.imgur.com/ykPPAsk.jpg" alt="Mini-Sistema de Alunos" width="100%">
 </p>
 
 ## 🚀 Tecnologias
